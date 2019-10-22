@@ -19,20 +19,18 @@
         
         var emp = `${{empid}}`.replace('$','')
         url = '/detailsapi/'+emp
-        alert("url--"+url)
+    
         $.ajax({
             url:  url,
             type:  'get',
             data: {'empid': emp},
             success: function  (data) {
               data = data.employe
-              alert(data)
                 let rows =  '';
                 rows += `
                 <table class="table table-striped"> `
 
                 $.each( data, function(i, employe) {
-                  alert("employe="+employe)
                   rows += `
                         <tr><td>Employee ID: </td><td>`+ employe.id + `</td></tr>
                         <tr><td>Employee Name: </td><td> ` + employe.employee_name + `</td></tr>
@@ -41,7 +39,8 @@
                         <tr><td>Phone: </td><td>` + employe.phone + `</td></tr>
                         <tr><td>Address: </td><td>` + employe.address + `</td></tr>
                         <tr><td>Photo: </td><td>
-                          <img src="{% static '` + employe.photo + `' %}" alt="image" width="300" height="333">
+                          <img src="/media/static/image/` + employe.image_as_a_blob + `" alt="image" width="200" height="200">
+                          
                         </td></tr>`
                 });
               rows += `</table>`
